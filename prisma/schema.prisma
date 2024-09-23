@@ -30,3 +30,13 @@ model User {
   updatedAt  DateTime @updatedAt
 }
 
+model Train {
+  id        Int      @id @default(autoincrement())
+  from      String
+  to        String
+  departure DateTime
+  arrival   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
