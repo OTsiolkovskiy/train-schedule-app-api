@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TrainService } from './train.service';
 import { CreateTrainDto } from './dto/create-train.dto';
 import { UpdateTrainDto } from './dto/update-train.dto';
+import { AuthGuard } from 'src/common/quards/auth.quard';
 
 @Controller('train')
 export class TrainController {
@@ -21,13 +24,20 @@ export class TrainController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAll() {
     return this.trainService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.trainService.findOne(+id);
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.trainService.findOne(+id);
+  // }
+
+  @Get('search')
+  async findByCity(@Query('from') from: string, @Query('to') to: string) {
+    console.log(`Finding trains from ${from} to ${to}`);
+    return this.trainService.findByCity(from, to);
   }
 
   @Patch(':id')

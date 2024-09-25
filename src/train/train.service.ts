@@ -40,4 +40,14 @@ export class TrainService {
       where: { id },
     });
   }
+
+  findByCity(from: string, to: string) {
+    return this.prisma.train.findMany({
+      where: {
+        from: from,
+        to: to,
+        // departure: 
+      },
+    });
+  }
 }
