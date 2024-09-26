@@ -35,9 +35,26 @@ export class TrainController {
   // }
 
   @Get('search')
-  async findByCity(@Query('from') from: string, @Query('to') to: string) {
+  async findByCity(
+    @Query('from') from: string,
+    @Query('to') to: string,
+    @Query('departureFrom') departureFrom: string,
+    @Query('departureUntil') departureUntil: string,
+  ) {
     console.log(`Finding trains from ${from} to ${to}`);
-    return this.trainService.findByCity(from, to);
+    console.log(
+      `Departure From: ${departureFrom}, Departure Until: ${departureUntil}`,
+    );
+
+    const departureFromDate = departureFrom ? new Date(departureFrom) : null;
+    const departureUntilDate = departureUntil ? new Date(departureUntil) : null;
+
+    return this.trainService.findByCity(
+      from,
+      to,
+      departureFromDate,
+      departureUntilDate,
+    );
   }
 
   @Patch(':id')

@@ -41,12 +41,21 @@ export class TrainService {
     });
   }
 
-  findByCity(from: string, to: string) {
+  findByCity(
+    from: string,
+    to: string,
+    departureFrom?: Date | null,
+    departureUntil?: Date | null,
+  ) {
     return this.prisma.train.findMany({
       where: {
         from: from,
         to: to,
-        // departure: 
+        departure: {
+          // gte: new Date(),
+          ...(departureFrom && { gte: departureFrom }), // Greater than or equal to departureFrom if provided
+          ...(departureUntil && { lt: departureUntil }),
+        },
       },
     });
   }
