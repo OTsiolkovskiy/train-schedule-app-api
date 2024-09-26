@@ -19,4 +19,10 @@ export class CityService {
   findAll() {
     return this.cities;
   }
+
+  findByCityName(cityName: string) {
+    return this.cities.filter((city) =>
+      city.city.toLowerCase().includes(cityName.toLowerCase()),
+    );
+  }
 }
