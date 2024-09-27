@@ -14,7 +14,7 @@ import { CreateTrainDto } from './dto/create-train.dto';
 import { UpdateTrainDto } from './dto/update-train.dto';
 import { AuthGuard } from 'src/common/quards/auth.quard';
 
-@Controller('train')
+@Controller('/api/v1/train')
 export class TrainController {
   constructor(private readonly trainService: TrainService) {}
 
